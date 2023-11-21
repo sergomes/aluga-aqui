@@ -23,11 +23,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Rua 1</td>
-                            <td>Bairro 2</td>
-                            <td>Cidade 3</td>
-                            <td>100</td>
+                        <tr v-for="(casa, index) in casas" :key="index">
+                            <td>{{casa.endereco}}</td>
+                            <td>{{casa.bairro}}</td>
+                            <td>{{casa.cidade}}</td>
+                            <td>{{casa.valor}}</td>
                             <td></td>
                         </tr>
                     </tbody>
