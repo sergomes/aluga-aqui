@@ -32,8 +32,8 @@
                             <td>{{casa.cidade}}</td>
                             <td>{{casa.valor}}</td>
                             <td>
-                                <button type="button" class="btn btn-primary">Editar</button>
-                                <button type="button" class="btn btn-danger">Excluir</button>
+                                <button type="button" class="btn btn-primary" @click="editarCasa(index)">Editar</button>
+                                <button type="button" class="btn btn-danger" @click="excluirCasa(index)">Excluir</button>
                             </td>
                         </tr>
                     </tbody>
@@ -42,10 +42,6 @@
         </div>
     </div>
     
-
-
-
-
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
@@ -67,6 +63,12 @@
               carregaCasas() {
                 this.casas = JSON.parse(localStorage.getItem("casas"));
               },
+              excluirCasa(index) {
+                this.casas.splice(index, 1);
+              },
+              editarCasa(index) {
+
+              }
 
             },
           
