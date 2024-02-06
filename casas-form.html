@@ -69,6 +69,7 @@
                     <div class="mb-2">
                     <label for="">Imagem
                       <input type="file" ref="imagem" @change="onChangeImagem">
+                      <img :src="casa.imagem" class="img-fluid" alt="" >
                     </label>
                     </div>
                   </div>
@@ -183,8 +184,6 @@
                   })
                 }
             },
-            
-           
         })
     </script>
     

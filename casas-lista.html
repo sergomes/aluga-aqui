@@ -24,11 +24,17 @@
                     </thead>
                     <tbody>
                         <tr v-for="(casa, index) in casas" :key="index">
+                            <td class="text-center">
+                                 <img v-bind:src="casa.imagem" class="img-fluid" style="max-width: 100px;" alt=""/>
+                            </td>
                             <td>{{casa.logradouro}}</td>
                             <td>{{casa.bairro}}</td>
                             <td>{{casa.cidade}}</td>
                             <td>{{casa.valor}}</td>
-                            <td></td>
+                            <td>
+                                <button type="button" class="btn btn-primary">Editar</button>
+                                <button type="button" class="btn btn-danger">Excluir</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
