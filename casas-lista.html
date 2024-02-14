@@ -32,8 +32,8 @@
                             <td>{{casa.cidade}}</td>
                             <td>{{casa.valor}}</td>
                             <td>
-                                <button type="button" class="btn btn-primary" @click="editarCasa(index)">Editar</button>
-                                <button type="button" class="btn btn-danger" @click="excluirCasa(index)">Excluir</button>
+                                <button type="button" class="btn btn-primary" @click="editarCasa(casa)">Editar</button>
+                                <button type="button" class="btn btn-danger" @click="excluirCasa(casa, index)">Excluir</button>
                             </td>
                         </tr>
                     </tbody>
@@ -63,11 +63,17 @@
               carregaCasas() {
                 this.casas = JSON.parse(localStorage.getItem("casas"));
               },
-              excluirCasa(index) {
+              excluirCasa(casa, index) {
+                let casas = JSON.parse(localStorage.getItem('casas'));
+                let indice = casas.findIndex(casa_ => casa_.id == casa.id);
+                casas.splice(indice, 1);
+                localStorage.setItem('casas', JSON.stringify(casas));
                 this.casas.splice(index, 1);
-              },
-              editarCasa(index) {
 
+              },
+              editarCasa(casa) {
+                console.log(casa);
+                window.location.href = "http://127.0.0.1:5501/casas-form.html?id=" + casa.id
               }
 
             },

@@ -146,7 +146,8 @@
                   }
                   let casas = JSON.parse(localStorage.getItem("casas"))
                   // localStorage.setItem('casas')
-                  casas.push(this.casa)
+                  this.casa.id = this.getRandomInt(1, 1000);
+                  casas.push(this.casa);
                   localStorage.setItem('casas', JSON.stringify(casas))
                   this.limpar();
                 },
@@ -171,6 +172,11 @@
                     this.casa.imagem = dataURL;
                   };
                   reader.readAsDataURL(file)
+                },
+                getRandomInt(min, max) { 
+                  min = Math.ceil(min); 
+                  max = Math.floor(max); 
+                  return Math.floor(Math.random() * (max - min + 1)) + min; 
                 },
 
             },
