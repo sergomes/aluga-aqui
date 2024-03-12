@@ -89,6 +89,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
    <script src="js/estados-cidades/index.js"></script>
     <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString)
         new Vue({
             el: '#app',
             nome: 'Inicio',
@@ -107,18 +109,17 @@
                     valor: '',
                 },
                 cidades: [],
-                estados: [],  
+                estados: [],
+                casas: null,  
               }
                 
             },
             mounted() {
-              let casas = localStorage.getItem('casas')
-              if(! casas) {
-                casas = [];
-                localStorage.setItem('casas', JSON.stringify(casas))
-              }
+              this.casas = JSON.parse(localStorage.getItem('casas'));
               this.carregarCidadesEstados()
-
+              if(urlParams.get('id')) {
+                this.abrir(urlParams.get('id'))
+              }
             },
             
             methods: {
@@ -132,6 +133,11 @@
                     this.estados = JSON.parse(localStorage.getItem('estados'))
                     }
                     
+                },
+                abrir(id) {
+                  let index = this.casas.findIndex(casa => casa.id == id)
+                  this.casa = this.casas[0]
+                  
                 },
                 validar() {
                   if(this.casa.logradouro == '') {
@@ -150,6 +156,11 @@
                   casas.push(this.casa);
                   localStorage.setItem('casas', JSON.stringify(casas))
                   this.limpar();
+                },
+                atualizar() {
+                  let index = this.casas.findIndex(casa => casa.id == this.casa.id);
+                  this.casas[index] = this.casa;
+        
                 },
                 limpar() {
                   this.casa = {
