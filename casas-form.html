@@ -115,7 +115,13 @@
                 
             },
             mounted() {
-              this.casas = JSON.parse(localStorage.getItem('casas'));
+              let casas = localStorage.getItem('casas');
+              if (casas) {
+                this.casas = JSON.parse(localStorage.getItem('casas'));
+              } else {
+                localStorage.setItem('casas', JSON.stringify([]));
+              }
+          
               this.carregarCidadesEstados()
               if(urlParams.get('id')) {
                 this.abrir(urlParams.get('id'))
@@ -150,16 +156,22 @@
                   if ( !this.validar() ) {
                     return false;
                   }
-                  let casas = JSON.parse(localStorage.getItem("casas"))
+                  if (this.casa.id) {
+                    this.atualizar()
+                  } else {
+                    let casas = JSON.parse(localStorage.getItem("casas"))
                   // localStorage.setItem('casas')
-                  this.casa.id = this.getRandomInt(1, 1000);
-                  casas.push(this.casa);
-                  localStorage.setItem('casas', JSON.stringify(casas))
-                  this.limpar();
+                    this.casa.id = this.getRandomInt(1, 1000);
+                    casas.push(this.casa);
+                    localStorage.setItem('casas', JSON.stringify(casas))
+                  }
+                    this.limpar();
+                 
                 },
                 atualizar() {
                   let index = this.casas.findIndex(casa => casa.id == this.casa.id);
                   this.casas[index] = this.casa;
+                  localStorage.setItem('casas', JSON.stringify(this.casas));
         
                 },
                 limpar() {
